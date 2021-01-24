@@ -14,6 +14,27 @@ const Vote = (props) => {
     </div>
   )
 }
+const Highest = (props) => {
+  let largest = 0;
+  const maxPoints = Math.max(...props.points)
+  const maxIndex = props.points.findIndex((item) => item === maxPoints)
+
+  if (maxPoints === 0) {
+    return (
+      <div>
+        No votes given
+      </div>
+    )
+  }
+
+    return (
+      <div>
+        {props.anecdotes[maxIndex]}
+        <div>Has {maxPoints} votes</div>
+      </div>
+    
+    )
+  }
 
 const App = (props) => {
   const points = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0);
@@ -34,6 +55,7 @@ const App = (props) => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>
       {props.anecdotes[selected]}
       </div>
@@ -49,6 +71,8 @@ const App = (props) => {
       handleClick={handleClick}
       text='Next anecdote'
       />
+      <h1>Anecdote with most votes</h1>
+      <Highest points={votes} anecdotes={props.anecdotes}/>
     </div>
   )
 }
