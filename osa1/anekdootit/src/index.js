@@ -40,7 +40,6 @@ const App = (props) => {
   const points = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0);
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(points)
-  console.log(votes)
 
   const voteAnecdote = () => {
     const copy = [...votes]
