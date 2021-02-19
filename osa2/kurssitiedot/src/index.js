@@ -1,17 +1,83 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.course.name}</h1>
+    </div>
+  )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const Part = (props) => {
+  return (
+    
+    <div>
+
+      {props.part.name} {props.part.exercises}
+    </div>
+  )
+}
+
+const Content = (props) => {
+ return(
+  <div>
+   
+      <Part part={props.parts[0]} />
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
+    
+  </div>
+ )
+}
+// const Total = (props) => {
+//   return (
+//       <div>
+//         <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises+props.parts[2].exercises} </p>
+//       </div>
+//   )
+// }
+const Course = (props) => {
+  return (
+      <div>
+      <Header course={props.course}/>
+      <Content parts={props.course.parts}/>
+      
+      </div>
+  )
+}
+const App = () => {
+    const course = {
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Tm on testi',
+          exercises: 18,
+          id: 4
+        }
+      ]
+    }
+  
+  return (
+    <div>
+      <Course course={course} />
+    </div>
+  )
+}
+ReactDOM.render(<App />, document.getElementById('root'))
