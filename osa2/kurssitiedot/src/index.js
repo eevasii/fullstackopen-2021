@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Header = (props) => {
+const Title = (props) => {
   return (
     <div>
-      <h1>{props.course.name}</h1>
+      <h2>{props.course.name}</h2>
     </div>
   )
 }
@@ -41,18 +41,33 @@ const Total = ({ parts }) => {
     </div>
   )
 }
+const Course = ({ course }) => {
+  return (
+    <div>
+      <h2>{course.name}</h2>
+    <Title course={course.parts}/>  
+    <Content parts={course.parts}/>
+    <Total parts={course.parts}/>
+    </div>
+  )
+}
 
-const Course = (props) => {
+
+
+const Courses = ({course}) => {
   return (
       <div>
-      <Header course={props.course}/>  
-      <Content parts={props.course.parts}/>
-      <Total parts={props.course.parts}/>
+      <h1>Web Development Curriculum</h1>
+      {course.map(course =>
+      <Course key = {course.id} course = {course}/>
+      
+      )}
       </div>
   )
 }
 const App = () => {
-    const course = {
+  const course = [
+    {
       name: 'Half Stack application development',
       id: 1,
       parts: [
@@ -77,11 +92,28 @@ const App = () => {
           id: 4
         }
       ]
+    }, 
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
     }
+  ]
   
   return (
     <div>
-      <Course course={course} />
+      <Courses course={course} />
     </div>
   )
 }
